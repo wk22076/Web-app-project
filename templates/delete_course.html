@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Delete Game</h2>
+
+<form method="post">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" value="{{ game.title }}" required><br><br> 
+
+    <label for="title">Platform</label>
+    <input type="text" name="platform" id="platform" value="{{ game.platform }}" required><br><br>
+
+    <label for="title">Genre</label>
+    <input type="text" name="genre" id="genre" value="{{ game.genre }}" required><br><br> 
+
+    <label for="title">Year</label>
+    <input type="number" name="year" id="year" value="{{ game.year }}" required><br><br> 
+
+    <label for="title">Sales (in millions)</label>
+    <input type="number" step="0.01" name="sales" id="sales" value="{{ game.sales }}" required><br><br>
+
+    <button class="submitformbutton" type="submit">Delete Game</button>
+</form>
+{% endblock %}

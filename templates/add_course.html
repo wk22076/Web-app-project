@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Add a New Game</h2>
+
+<form method="post">
+    <label for="title">Title</label>
+    <input type = "text" name = "title" id = "title" required>
+
+    <label type = "platform">Platform</label>
+    <input type = "text" name = "platform" id = "platform" required>
+
+    <label type = "genre">Genre</label>
+    <input type = "text" name = "genre" id = "genre" required> 
+
+    <label type = "year">Year</label>
+    <input type = "number" name = "year" id = "year" required>
+
+    <label type = "sales">Sales (in millions)</label>
+    <input type = "number" step = "0.01" name = "sales" id = "sales" required>
+
+    <button type = "submit">Add game</button>
+</form>
+{% endblock %}
