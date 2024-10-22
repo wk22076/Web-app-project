@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.secret_key =  "supersecretkey"
 
 def get_db_connection():
-    conn = sqlite3.connect('games.db')
+    conn = sqlite3.connect('courses.db')
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -14,15 +14,15 @@ def get_db_connection():
 def index():
     return render_template('index.html')
 
-@app.route('/games')
+@app.route('/courses')
 def view_games():
     conn = get_db_connection()
-    games = conn.execute('SELECT * FROM games').fetchall()
+    games = conn.execute('SELECT * FROM courses').fetchall()
     conn.close()
-    return render_template('view_games.html', games = games)
+    return render_template('view_courses.html', games = games)
 
 @app.route('/add', methods = ('GET', 'POST'))
-def add_game():
+def add_courses():
     if request.method == 'POST':
         title = request.form['title']
         platform = request.form['platform']
