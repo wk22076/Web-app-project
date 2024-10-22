@@ -22,7 +22,7 @@ def view_courses():
     return render_template('view_courses.html', courses = courses)
 
 @app.route('/add', methods = ('GET', 'POST'))
-def add_courses():
+def add_course():
     if request.method == 'POST':
         title = request.form['title']
         teacher = request.form['teacher']
@@ -38,7 +38,7 @@ def add_courses():
         conn.close()
         return redirect (url_for('view_courses'))
 
-    return render_template('add_courses.html')
+    return render_template('add_course.html')
 
 @app.route('/edit/<int:id>', methods = ('GET', 'POST'))
 def edit_course(id):
