@@ -5,20 +5,14 @@
 
 <form method="post">
     <label for="title">Title</label>
-    <input type = "text" name = "title" id = "title" value ="{{game.title }}" required>
+    <input type = "text" name = "title" id = "title" value ="{{course.title }}" required>
 
-    <label type = "platform">Platform</label>
-    <input type = "text" name = "platform" id = "platform" value ="{{game.title }}" required>
+    <label type = "platform">Teacher</label>
+    <input type = "text" name = "Teacher" id = "Teacher" value ="{{course.teacher }}" required>
 
-    <label type = "genre">Genre</label>
-    <input type = "text" name = "genre" id = "genre" value ="{{game.title }}" required>
+    <label type = "genre">Start month</label>
+    <input type = "text" name = "Start month" id = "Start month" value ="{{course.start_month }}" required>
 
-    <label type = "year">Year</label>
-    <input type = "number" name = "year" id = "year" value ="{{game.title }}" required>
-
-    <label type = "sales">Sales (in millions)</label>
-    <input type = "number" step = "0.01" name = "sales" id = "sales" value ="{{game.title }}" required> 
-
-    <button type = "submit">Update game</button>
+    <button type = "submit">Update course</button>
 </form>
 {% endblock %}

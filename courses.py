@@ -15,69 +15,65 @@ def index():
     return render_template('index.html')
 
 @app.route('/courses')
-def view_games():
+def view_courses():
     conn = get_db_connection()
-    games = conn.execute('SELECT * FROM courses').fetchall()
+    courses = conn.execute('SELECT * FROM courses').fetchall()
     conn.close()
-    return render_template('view_courses.html', games = games)
+    return render_template('view_courses.html', courses = courses)
 
 @app.route('/add', methods = ('GET', 'POST'))
 def add_courses():
     if request.method == 'POST':
         title = request.form['title']
-        platform = request.form['platform']
-        genre = request.form['genre']
-        year = request.form['year']
-        sales = request.form['sales']
+        teacher = request.form['teacher']
+        start_month = request.form['start_month']
 
-        if not title or not platform or not year or not sales:
+        if not title or not teacher or not start_month:
             flash('All fields are required')
         else:
             conn = get_db_connection()
-            conn.execute('INSERT INTO games (title, platform, genre, year, sales) VALUES (?, ?, ?, ?, ?)', (title, platform, genre, year, sales)) 
+            conn.execute('INSERT INTO courses (title, teacher, start_month) VALUES (?, ?, ?)', (title, teacher, start_month)) 
 
         conn.commit()
         conn.close()
-        return redirect (url_for('view_games'))
+        return redirect (url_for('view_courses'))
 
-    return render_template('add_game.html')
+    return render_template('add_courses.html')
 
 @app.route('/edit/<int:id>', methods = ('GET', 'POST'))
-def edit_game(id):
+def edit_course(id):
     conn = get_db_connection()
-    game = conn.execute('SELECT * FROM games WHERE id = ?', (id,)).fetchone()
+    course = conn.execute('SELECT * FROM course WHERE id = ?', (id,)).fetchone()
 
     if request.method == 'POST':
         title = request.form['title']
-        platform = request.form['platform']
-        genre = request.form['genre']
-        year = request.form['year']
-        sales = request.form['sales']
+        teacher = request.form['teacher']
+        start_month = request.form['start_month']
 
-        if not title or not platform or not year or not sales:
+        if not title or not teacher or not start_month:
             flash('All fields are required')
         else:
             conn = get_db_connection()
-            conn.execute('UPDATE games SET title = ?, platform = ?, genre = ?, year = ?, sales = ? WHERE id = ?', (title, platform, genre, year, sales, id)) 
+            conn.execute('UPDATE courses SET title = ?, teacher = ?, start_month = ?,  WHERE id = ?', (title, teacher, start_month, id)) 
 
             conn.commit()
             conn.close()
-            return redirect (url_for('view_games')) 
+            return redirect (url_for('view_courses')) 
 
-    return render_template('edit_game.html', game = game)
+    return render_template('edit_course.html', course = course)
 
 @app.route('/delete/<int:id>', methods=('GET', 'POST'))
-def delete_game(id):
+def delete_course(id):
     conn = get_db_connection()
-    game = conn.execute('SELECT * FROM games WHERE id = ?', (id,)).fetchone()
+    course = conn.execute('SELECT * FROM course WHERE id = ?', (id,)).fetchone()
 
     if request.method == 'POST':
-        conn.execute('DELETE FROM games WHERE id = ?', (id,))
+        conn.execute('DELETE FROM course WHERE id = ?', (id,))
         conn.commit()
         conn.close()
-        return redirect(url_for('view_games'))
+        return redirect(url_for('view_course'))
 
-    return render_template('delete_game.html', game=game)
+    return render_template('delete_course.html', course=course)
 
 
 
