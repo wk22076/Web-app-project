@@ -17,7 +17,7 @@ def index():
 @app.route('/courses')
 def view_courses():
     conn = get_db_connection()
-    courses = conn.execute('SELECT * FROM courses').fetchall()
+    courses = conn.execute('SELECT * FROM Courses').fetchall()
     conn.close()
     return render_template('view_courses.html', courses = courses)
 
@@ -74,7 +74,6 @@ def delete_course(id):
         return redirect(url_for('view_course'))
 
     return render_template('delete_course.html', course=course)
-
 
 
 
